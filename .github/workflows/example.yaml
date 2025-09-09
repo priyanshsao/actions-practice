@@ -6,9 +6,15 @@ jobs:
     first_job:
         runs-on: ubuntu-latest
         steps:
+            - name: checkout the repo
+              uses: actions/checkout@v4
+
             - name: welcome message
               run: echo "welcome"
 
             - name: list files
-              run: ls 
+              run: ls
+            
+            - name: read
+              run: cat readme.md
 
