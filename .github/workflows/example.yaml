@@ -11,7 +11,7 @@ jobs:
         user_password: xyz
 
       steps:
-        - name: print step level env
+        - name: print step, job, workflow level env variables
           env: 
             user_name: alex
           run: | 
