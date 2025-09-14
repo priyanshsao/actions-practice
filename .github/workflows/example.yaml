@@ -1,20 +1,18 @@
-name: concurrency workflow
+name: matrix workflow
 
 on: push
 
-jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps: 
-        - name: printing stage name
-          run: echo deploy stage
+jobs: 
+  deploy:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+        images: [hello-world, alpine]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Echo Docker Details
+        run: docker info
+      
+      - name: Running image on ${{ matrix.os }}
+        run: docker pull ${{ matrix.images }}
     
-    deploy:
-      timeout-minutes: 1
-      concurrency:
-        group: production-deploy
-        cancel-in-progress: false
-      runs-on: ubuntu-latest
-      steps:
-        - name: sleep for 100 seconds
-          run: sleep 100
