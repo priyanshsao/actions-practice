@@ -1,22 +1,21 @@
-name: multiple jobs workflow
+name: concurrency workflow
 
 on: push
-env:
-  MESSAGE: hello
 
 jobs:
     build:
       runs-on: ubuntu-latest
-      env:
-        user_password: xyz
-
+      steps: 
+        - name: print stage name
+          run: echo deploy stage
+    
+    deploy:
+      concurrency:
+        group: production-deploy
+        cancel-in-progress: false
+      runs-on: ubuntu-latest
       steps:
-        - name: print step, job, workflow level env variables
-          env: 
-            user_name: alex
-          run: | 
-            echo step:$user_name
-            echo job:$user_password
-            echo workflow:$MESSAGE
-
+        - name: sleep for 100 seconds
+          run: sleep 100
+      
    
