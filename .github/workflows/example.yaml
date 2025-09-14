@@ -6,7 +6,7 @@ jobs:
     build:
       runs-on: ubuntu-latest
       steps: 
-        - name: print stage name
+        - name: printing stage name
           run: echo deploy stage
     
     deploy:
