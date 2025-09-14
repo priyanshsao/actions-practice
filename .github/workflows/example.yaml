@@ -10,7 +10,7 @@ jobs:
           run: echo deploy stage
     
     deploy:
-      timeout-minutes: 0.25
+      timeout-minutes: 1
       concurrency:
         group: production-deploy
         cancel-in-progress: false
