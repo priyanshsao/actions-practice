@@ -10,6 +10,7 @@ jobs:
           run: echo deploy stage
     
     deploy:
+      timeout-minutes: 0.25
       concurrency:
         group: production-deploy
         cancel-in-progress: false
@@ -17,5 +18,3 @@ jobs:
       steps:
         - name: sleep for 100 seconds
           run: sleep 100
-      
-   
