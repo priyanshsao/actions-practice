@@ -3,24 +3,16 @@ name: matrix(additional config) workflow
 on: push
 
 jobs: 
-  deploy:
-    strategy:
-      fail-fast: false
-      max-parallel: 2
-      matrix:
-        os: [ubuntu-latest, ubuntu-20.04, windows-latest]
-        images: [hello-world, alpine]
-        exclude: 
-          - images: alpine
-            os: windows-latest
-        include: 
-          - images: amd64/alpine
-            os: ubuntu-20.04 
-    runs-on: ${{ matrix.os }}
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Echo Docker Details
-        run: docker info
-      
-      - name: Running image on ${{ matrix.os }}
-        run: docker pull ${{ matrix.images }}
+      - name: building
+        run: echo this is build step
+  deploy: 
+    if: ${{ github.ref == 'ref/head/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: building
+        run: echo this is deploy step
+
     
