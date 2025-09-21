@@ -9,7 +9,7 @@ jobs:
       - name: building
         run: echo this is build step
   deploy: 
-    if: ${{ github.ref == 'ref/head/main' }}
+    if: ${{ github.ref == 'ref/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - name: building
