@@ -1,18 +1,22 @@
-name: matrix(additional config) workflow
+name: filtering with events
 
-on: push
+on: 
+  push:
+    branches:
+      - main
+      - '!feature/*'
+  pull_request:
+    types:
+      - opened
+      - closed
+    paths-ignore:
+      - README.md
+    branches:
+      - main
+
 
 jobs: 
-  build:
+  hello:
     runs-on: ubuntu-latest
-    steps:
-      - name: building
-        run: echo this is build step
-  deploy: 
-    if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: building
-        run: echo this is deploy step
-
+    run: echo this workflow is executed for event type - ${{ github.event_name }}
     
